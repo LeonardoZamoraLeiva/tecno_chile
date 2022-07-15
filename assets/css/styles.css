@@ -6,3 +6,14 @@
   /* border-style: double; */
   border-width: 10px;
 }
+
+#iconStyle {
+  font-size: 2rem;
+}
+
+#towerStyles {
+  background-color: rgb(139, 139, 139);
+  color: rgb(255, 255, 255);
+  box-shadow: 1vw;
+  opacity: 80%;
+}
