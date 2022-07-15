@@ -51,27 +51,10 @@
                 >Productos</a
               >
             </li>
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Dropdown
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><hr class="dropdown-divider" /></li>
-                <li>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </li>
-              </ul>
-            </li> -->
+
+            </li>
             <li class="nav-item">
-              <a class="nav-link aria-current="page" href="#footer">Redes sociales</a>
+              <a class="nav-link aria-current='page'" href="#footer">Redes sociales</a>
             </li>
           </ul>
           <div class="container">
@@ -103,13 +86,12 @@
       width="100%"
     />
 
-
     <main>
-      <div class="container container-fluid my-5" id="productos">
-        <div class="row justify-content-between">
+      <div class="container container-fluid my-5 " id="productos">
+        <div class="row justify-content-center">
           <div class="col-6"> 
             <h3 class="mb-5">
-            Desktop a prueba de todo          </h3>
+            Desktop a toda prueba!</h3>
             <div
             
               id="carouselExampleDark"
@@ -200,49 +182,64 @@
               </button>
             </div>
           </div>
-          <div class="col-5"> <h4>
-            Grran variedad de accesorios y consolas          </h4>
-            <div class="row row-cols-1 row-cols-md-2 g-4">
-                <div class="col">
-                  <div class="card">
-                    <img src="https://www.sony.cl/image/dd18cf93606d238305a733d336c45537?fmt=pjpeg&wid=330&bgcolor=FFFFFF&bgc=FFFFFF" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Audifonos</h5>
-                      <p class="card-text">Contamos con una gran variedad de audifonos. Desde audifonos Gamer gasta inalambricos</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="card">
-                    <img src="https://sipoonline.cl/wp-content/uploads/2021/05/Kit-Gamer-2-en-1-Onikuma-G25-CW905-Teclado-Mouse-Pink-Edition.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Teclado y Mouse</h5>
-                      <p class="card-text">Contamos con los mejores combos Teclado+Mouse. Desde oficina hasta categoria Gamer</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="card">
-                    <img src="https://media.solotodo.com/media/products/1253198_picture_1603257526.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Notebooks</h5>
-                      <p class="card-text">Notebook y tablets. De todas las categorias y precios para que elijas el que mejor se acomoda a tus necesidades.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="card">
-                    <img src="https://s3.amazonaws.com/businessinsider.mx/wp-content/uploads/2021/12/08164547/Comparacio%CC%81n-de-consolas.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Consolas</h5>
-                      <p class="card-text">Porque no todo es trabajo, contamos con stock de todas las consolas de ultima generacion. Como amantes de los videojuegos, contamos tambien con consolas retro. </p>
-                    </div>
-                  </div>
-                </div>
+        </div>
+      </div>
+
+
+      <div class="container">
+        <div class="row">
+          <div class="col"> 
+            <h4>Gran variedad de accesorios y consolas</h4>
+          </div>
+        </div>
+
+        <div class="row row-cols-2 row-cols-md-4 g-5 mb-5 justify-content-center">
+          <div class="col">
+            <div class="card" style="max-width: 12rem">
+              <img src="https://www.sony.cl/image/dd18cf93606d238305a733d336c45537?fmt=pjpeg&wid=330&bgcolor=FFFFFF&bgc=FFFFFF" class="card-img-top" alt="...">
+              <div class="card-body">
+                  <a class='btn btn-light' data-bs-toggle="collapse" href="#audifonosText" >
+                    Audifonos
+                  </a>
+                <p class="card-text collapse" id="audifonosText">Contamos con una gran variedad de audifonos. Desde audifonos Gamer gasta inalambricos</p>
               </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card" style="max-width: 12rem">
+              <img src="https://sipoonline.cl/wp-content/uploads/2021/05/Kit-Gamer-2-en-1-Onikuma-G25-CW905-Teclado-Mouse-Pink-Edition.jpg" class="card-img-top " alt="...">
+              <div class="card-body">
+                  <a class='btn btn-light' data-bs-toggle="collapse" href="#tecladoMouse" >
+                    Teclado y Mouse
+                  </a>
+                <p class="card-text collapse" id="tecladoMouse">Contamos con los mejores combos Teclado+Mouse. Desde oficina hasta categoria Gamer</p>
+              </div>
+
+            </div>
+          </div>
+          <div class="col">
+            <div class="card" style="max-width: 12rem">
+              <img src="https://media.solotodo.com/media/products/1253198_picture_1603257526.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                  <a class='btn btn-light' data-bs-toggle="collapse" href="#notebooks" >
+                    Notebooks
+                  </a>
+                <p class="card-text collapse" id="notebooks">Notebook y tablets. De todas las categorias y precios para que elijas el que mejor se acomoda a tus necesidades</p>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card" style="max-width: 12rem">
+              <img src="https://s3.amazonaws.com/businessinsider.mx/wp-content/uploads/2021/12/08164547/Comparacio%CC%81n-de-consolas.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                  <a class='btn btn-light' data-bs-toggle="collapse" href="#consolas" >Consolas</a>
+                <p class="card-text collapse" id="consolas">Porque no todo es trabajo, contamos con stock de todas las consolas de ultima generacion. Como amantes de los videojuegos, contamos tambien con consolas retro</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+    
 
       <table id="table" class="display" style="width:100%">
         <thead>

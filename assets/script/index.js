@@ -12,7 +12,7 @@ function preguntarNombre() {
   if (name == null || name == "") {
     txt = "No Name provided";
   } else {
-    txt = `Hello ${name}!`;
+    txt = `Bienvenido ${name}!`;
   }
   alert(txt);
   if (txt != "No Name provided") {
