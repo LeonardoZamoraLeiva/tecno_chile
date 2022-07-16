@@ -41,3 +41,42 @@ function agregarNombre() {}
 // var text = document.createTextNode("This just got added");
 
 // paragraph.appendChild(text);
+
+// FUNCION DE CONTADOR
+let i = 0;
+document.getElementById("contador").innerHTML = i
+function contadorSuma() {
+  i++;
+  if (i === 20){
+    $('#contador').removeClass('normal');
+    $('#contador').addClass('verde');
+  }
+  if (i > 0 && i < 20){
+    $('#contador').removeClass('rojo');
+    $('#contador').removeClass('verde');
+    $('#contador').addClass('normal');
+  }
+  else if (i < 0) {
+    $('#contador').removeClass('normal');
+    $('#contador').addClass('rojo');
+  }
+  document.getElementById("contador").innerHTML = i;
+}
+
+function contadorResta() {
+  i--;
+  if (i === 20){
+    $('#contador').removeClass('normal');
+    $('#contador').addClass('verde');
+  }
+  if (i >= 0 && i < 20){
+    $('#contador').removeClass('rojo');
+    $('#contador').removeClass('verde');
+    $('#contador').addClass('normal');
+  }
+  else if (i < 0) {
+    $('#contador').removeClass('normal');
+    $('#contador').addClass('rojo');
+  }
+  document.getElementById("contador").innerHTML = i;
+}
