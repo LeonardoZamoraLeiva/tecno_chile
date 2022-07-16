@@ -17,3 +17,12 @@
   box-shadow: 1vw;
   opacity: 80%;
 }
+.normal{
+  background-color: whitesmoke;
+}
+.rojo{
+  background-color: red;
+}
+.verde{
+  background-color:green;
+}
