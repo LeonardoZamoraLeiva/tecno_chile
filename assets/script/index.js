@@ -32,7 +32,7 @@ function contadorSuma() {
     $("#contador").removeClass("normal");
     $("#contador").addClass("verde");
   }
-  if (i > 0 && i < 20) {
+  if (i >= 0 && i < 20) {
     $("#contador").removeClass("rojo");
     $("#contador").removeClass("verde");
     $("#contador").addClass("normal");
