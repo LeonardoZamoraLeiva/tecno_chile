@@ -97,8 +97,22 @@ function crearProductos() {
 
 crearProductos();
 
+let tablaProductos = document.getElementById("tituloProductos");
+let footerProductos = document.getElementById("footerProductos");
+
 $(document).ready(function () {
-  $("#example").DataTable({
+  Object.keys(productos[0]).forEach((key) => {
+    if (key != "imagen" && key != "descripcion") {
+      const tableHeader = document.createElement("th");
+      tableHeader.textContent = key;
+      const tableFooter = document.createElement("th");
+      tableFooter.textContent = key;
+      tablaProductos.appendChild(tableHeader);
+      footerProductos.appendChild(tableFooter);
+    }
+  });
+
+  $("#tablaProductos").DataTable({
     data: productos,
     columns: [
       { data: "Nombre" },
