@@ -104,6 +104,7 @@ let productos = [
 
 const divisa = "$";
 let productosCarrito = document.getElementById("carritoElements");
+let elementosCarrito = document.getElementById("elementosCarrito");
 
 function crearProductos() {
   productos.forEach((info) => {
@@ -134,8 +135,15 @@ function crearProductos() {
     miNodoBoton.onclick = function agregarCarrito() {
       if (info.Stock === "Si") {
         nuevoItem = listaCarrito.push(info);
+        nombresItems.push(info.Nombre);
+        precioCarrito.push(info.Precio);
         console.log(listaCarrito);
       } else alert("Este elemento no está disponible");
+
+      const miNodoCarrito = document.createElement("div");
+      miNodoCarrito.textContent = nombresItems;
+      // elementosCarrito.removeChild();
+      elementosCarrito.appendChild(miNodoCarrito);
     };
     // EVENTUALMENTE AGREGAR STOCK POR CANTIDAD
 
@@ -178,5 +186,6 @@ $(document).ready(function () {
   });
 });
 // Lista de carrito
+let nombresItems = [];
 let listaCarrito = [];
 let precioCarrito = [];
