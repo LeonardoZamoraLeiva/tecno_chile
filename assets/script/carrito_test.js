@@ -129,8 +129,7 @@ function crearProductos() {
     const miNodoBoton = document.createElement("button");
     miNodoBoton.classList.add("btn", "btn-primary");
     miNodoBoton.textContent = "+";
-    miNodoBoton.setAttribute("marcador", info.Codigo);
-    // miNodoBoton.addEventListener("click", anyadirProductoAlCarrito);
+
     // Insertamos
     miNodoCardBody.appendChild(miNodoImagen);
     miNodoCardBody.appendChild(miNodoTitle);
