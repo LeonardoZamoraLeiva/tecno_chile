@@ -130,6 +130,16 @@ function crearProductos() {
     miNodoBoton.classList.add("btn", "btn-primary");
     miNodoBoton.textContent = "+";
     miNodoBoton.setAttribute("marcador", info.Codigo);
+    // al hacer click comienza la funcion
+    miNodoBoton.onclick = function agregarCarrito(){
+      if (info.Stock === 'Si'){
+      nuevoItem = listaCarrito.push(info)
+      console.log(listaCarrito);
+    } else alert('Este elemento no está disponible');
+    }
+    // EVENTUALMENTE AGREGAR STOCK POR CANTIDAD
+    
+    //agregarCarrito(info);
     // miNodoBoton.addEventListener("click", anyadirProductoAlCarrito);
     // Insertamos
     miNodoCardBody.appendChild(miNodoImagen);
@@ -167,3 +177,8 @@ $(document).ready(function () {
     ],
   });
 });
+// Lista de carrito
+let listaCarrito = [];
+let precioCarrito = [];
+
+
