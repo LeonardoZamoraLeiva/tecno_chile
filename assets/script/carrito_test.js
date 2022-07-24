@@ -105,9 +105,56 @@ let productos = [
 const divisa = "$";
 let productosCarrito = document.getElementById("carritoElements");
 let elementosCarrito = document.getElementById("elementosCarrito");
+let preciosCarrito = document.getElementById("preciosCarrito");
+// Lista de carrito
+let nombresItems = [];
+var preciosItems = {};
+
+function removeDuplicates(arr) {
+  return arr.filter((item, index) => arr.indexOf(item) === index);
+}
+
+function crearElementosCarrito(object) {
+  console.log(object);
+  Object.entries(object).forEach((entry) => {
+    const miNodoCarrito = document.createElement("div");
+    const [key, value] = entry;
+    miNodoCarrito.textContent = `${key}  x ${value}`;
+    miNodoCarrito.setAttribute("id", key);
+    if (elementosCarrito.hasChildNodes()) {
+      if (document.getElementById(key)) {
+        var nuevoDiv = document.getElementById(key);
+        elementosCarrito.removeChild(nuevoDiv);
+        elementosCarrito.appendChild(miNodoCarrito);
+      } else {
+        elementosCarrito.appendChild(miNodoCarrito);
+      }
+    } else {
+      elementosCarrito.appendChild(miNodoCarrito);
+    }
+  });
+}
+
+function agregarCarrito(info) {
+  console.log(info);
+  if (info.Stock === "Si") {
+    nombresItems.push(info.Nombre);
+    var preciosItems = removeDuplicates(nombresItems);
+    console.log(nombresItems);
+
+    nombresItems.forEach((x) => {
+      preciosItems[x] = (preciosItems[x] || 0) + 1;
+      preciosItems.shift();
+    });
+    console.log(preciosItems);
+  } else alert("Este elemento no está disponible");
+
+  crearElementosCarrito(preciosItems);
+}
 
 function crearProductos() {
   productos.forEach((info) => {
+    // console.log(info);
     // Estructura
     const miNodo = document.createElement("div");
     miNodo.classList.add("card", "col-lg-2", "col-md-4", "col-sm-6");
@@ -132,19 +179,49 @@ function crearProductos() {
     miNodoBoton.textContent = "+";
     miNodoBoton.setAttribute("marcador", info.Codigo);
     // al hacer click comienza la funcion
-    miNodoBoton.onclick = function agregarCarrito() {
-      if (info.Stock === "Si") {
-        nuevoItem = listaCarrito.push(info);
-        nombresItems.push(info.Nombre);
-        precioCarrito.push(info.Precio);
-        console.log(listaCarrito);
-      } else alert("Este elemento no está disponible");
-
-      const miNodoCarrito = document.createElement("div");
-      miNodoCarrito.textContent = nombresItems;
-      // elementosCarrito.removeChild();
-      elementosCarrito.appendChild(miNodoCarrito);
+    miNodoBoton.onclick = function () {
+      agregarCarrito(info);
     };
+    // agregarCarrito(info);
+    // {
+    //   if (info.Stock === "Si") {
+    //     // nuevoItem = listaCarrito.push(info);
+    //     nombresItems.push(info.Nombre);
+    //     var listaMostrar = removeDuplicates(nombresItems);
+    //     var counts = {};
+
+    //     nombresItems.forEach((x) => {
+    //       counts[x] = (counts[x] || 0) + 1;
+    //     });
+
+    //     console.log(counts);
+    //     precioCarrito.push(info.Precio);
+    //     // console.log(listaCarrito);
+    //   } else alert("Este elemento no está disponible");
+
+    //   const miNodoCarrito = document.createElement("div");
+    //   miNodoCarrito.textContent = listaMostrar;
+    //   miNodoCarrito.setAttribute("id", "elNodo");
+    //   if (elementosCarrito.hasChildNodes()) {
+    //     var nuevoDiv = document.getElementById("elNodo");
+    //     elementosCarrito.removeChild(nuevoDiv);
+    //     elementosCarrito.appendChild(miNodoCarrito);
+    //   } else {
+    //     elementosCarrito.appendChild(miNodoCarrito);
+    //   }
+    //   const miCantidadCarrito = document.createElement("div");
+    //   miCantidadCarrito.textContent = counts;
+    //   miCantidadCarrito.setAttribute("id", "laCantidad");
+    //   if (preciosCarrito.hasChildNodes()) {
+    //     var elDiv = document.getElementById("laCantidad");
+    //     preciosCarrito.removeChild(elDiv);
+    //     preciosCarrito.appendChild(miCantidadCarrito);
+    //   } else {
+    //     preciosCarrito.appendChild(miCantidadCarrito);
+    //   }
+    //   console.log(listaMostrar);
+    //   console.log(nombresItems);
+    // };
     // EVENTUALMENTE AGREGAR STOCK POR CANTIDAD
 
     //agregarCarrito(info);
@@ -185,7 +262,3 @@ $(document).ready(function () {
     ],
   });
 });
-// Lista de carrito
-let nombresItems = [];
-let listaCarrito = [];
-let precioCarrito = [];
