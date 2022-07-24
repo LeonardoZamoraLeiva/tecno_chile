@@ -106,6 +106,7 @@ const divisa = "$";
 let productosCarrito = document.getElementById("carritoElements");
 let elementosCarrito = document.getElementById("elementosCarrito");
 let preciosCarrito = document.getElementById("preciosCarrito");
+let precioTotal = document.getElementById("precioTotal");
 // Lista de carrito
 let nombresItems = [];
 var preciosItems = {};
@@ -115,7 +116,6 @@ function removeDuplicates(arr) {
 }
 
 function crearElementosCarrito(object) {
-  console.log(object);
   Object.entries(object).forEach((entry) => {
     const miNodoCarrito = document.createElement("div");
     const [key, value] = entry;
@@ -135,26 +135,51 @@ function crearElementosCarrito(object) {
   });
 }
 
+function precioTotalFunc(preciosItems, database) {
+  var precioCompra = 0;
+  Object.entries(preciosItems).forEach((entry) => {
+    console.log(entry);
+    const [key, value] = entry;
+    database.forEach((info) => {
+      if (key == info.Nombre) {
+        console.log(info.Precio);
+        precioCompra = precioCompra + info.Precio * value;
+      }
+    });
+    console.log(precioCompra);
+  });
+
+  let miNodoPrecioTotal = document.createElement("div");
+  miNodoPrecioTotal.setAttribute("id", "totalCarrito");
+  miNodoPrecioTotal.classList.add("my-4");
+
+  miNodoPrecioTotal.textContent = `Precio Total = ${precioCompra}`;
+  if (precioTotal.hasChildNodes()) {
+    var totalDiv = document.getElementById("totalCarrito");
+    precioTotal.removeChild(totalDiv);
+    precioTotal.appendChild(miNodoPrecioTotal);
+  } else {
+    precioTotal.appendChild(miNodoPrecioTotal);
+  }
+}
+
 function agregarCarrito(info) {
   console.log(info);
   if (info.Stock === "Si") {
     nombresItems.push(info.Nombre);
     var preciosItems = removeDuplicates(nombresItems);
-    console.log(nombresItems);
-
     nombresItems.forEach((x) => {
       preciosItems[x] = (preciosItems[x] || 0) + 1;
       preciosItems.shift();
     });
-    console.log(preciosItems);
   } else alert("Este elemento no está disponible");
 
   crearElementosCarrito(preciosItems);
+  precioTotalFunc(preciosItems, productos);
 }
 
 function crearProductos() {
   productos.forEach((info) => {
-    // console.log(info);
     // Estructura
     const miNodo = document.createElement("div");
     miNodo.classList.add("card", "col-lg-2", "col-md-4", "col-sm-6");
@@ -182,50 +207,7 @@ function crearProductos() {
     miNodoBoton.onclick = function () {
       agregarCarrito(info);
     };
-    // agregarCarrito(info);
-    // {
-    //   if (info.Stock === "Si") {
-    //     // nuevoItem = listaCarrito.push(info);
-    //     nombresItems.push(info.Nombre);
-    //     var listaMostrar = removeDuplicates(nombresItems);
-    //     var counts = {};
 
-    //     nombresItems.forEach((x) => {
-    //       counts[x] = (counts[x] || 0) + 1;
-    //     });
-
-    //     console.log(counts);
-    //     precioCarrito.push(info.Precio);
-    //     // console.log(listaCarrito);
-    //   } else alert("Este elemento no está disponible");
-
-    //   const miNodoCarrito = document.createElement("div");
-    //   miNodoCarrito.textContent = listaMostrar;
-    //   miNodoCarrito.setAttribute("id", "elNodo");
-    //   if (elementosCarrito.hasChildNodes()) {
-    //     var nuevoDiv = document.getElementById("elNodo");
-    //     elementosCarrito.removeChild(nuevoDiv);
-    //     elementosCarrito.appendChild(miNodoCarrito);
-    //   } else {
-    //     elementosCarrito.appendChild(miNodoCarrito);
-    //   }
-    //   const miCantidadCarrito = document.createElement("div");
-    //   miCantidadCarrito.textContent = counts;
-    //   miCantidadCarrito.setAttribute("id", "laCantidad");
-    //   if (preciosCarrito.hasChildNodes()) {
-    //     var elDiv = document.getElementById("laCantidad");
-    //     preciosCarrito.removeChild(elDiv);
-    //     preciosCarrito.appendChild(miCantidadCarrito);
-    //   } else {
-    //     preciosCarrito.appendChild(miCantidadCarrito);
-    //   }
-    //   console.log(listaMostrar);
-    //   console.log(nombresItems);
-    // };
-    // EVENTUALMENTE AGREGAR STOCK POR CANTIDAD
-
-    //agregarCarrito(info);
-    // miNodoBoton.addEventListener("click", anyadirProductoAlCarrito);
     // Insertamos
     miNodoCardBody.appendChild(miNodoImagen);
     miNodoCardBody.appendChild(miNodoTitle);
