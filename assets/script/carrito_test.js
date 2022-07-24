@@ -119,7 +119,8 @@ function crearElementosCarrito(object) {
   Object.entries(object).forEach((entry) => {
     const miNodoCarrito = document.createElement("div");
     const [key, value] = entry;
-    miNodoCarrito.textContent = `${key}  x ${value}`;
+    miNodoCarrito.textContent = `${key}  x   ${value}`;
+    miNodoCarrito.classList.add("elementoCarrito");
     miNodoCarrito.setAttribute("id", key);
     if (elementosCarrito.hasChildNodes()) {
       if (document.getElementById(key)) {
@@ -138,7 +139,6 @@ function crearElementosCarrito(object) {
 function precioTotalFunc(preciosItems, database) {
   var precioCompra = 0;
   Object.entries(preciosItems).forEach((entry) => {
-    console.log(entry);
     const [key, value] = entry;
     database.forEach((info) => {
       if (key == info.Nombre) {
@@ -149,11 +149,9 @@ function precioTotalFunc(preciosItems, database) {
     console.log(precioCompra);
   });
 
-  let miNodoPrecioTotal = document.createElement("div");
+  let miNodoPrecioTotal = document.createElement("col-4");
   miNodoPrecioTotal.setAttribute("id", "totalCarrito");
-  miNodoPrecioTotal.classList.add("my-4");
-
-  miNodoPrecioTotal.textContent = `Precio Total = ${precioCompra}`;
+  miNodoPrecioTotal.textContent = `Total = $ ${precioCompra}`;
   if (precioTotal.hasChildNodes()) {
     var totalDiv = document.getElementById("totalCarrito");
     precioTotal.removeChild(totalDiv);

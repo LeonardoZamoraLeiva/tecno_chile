@@ -3,7 +3,6 @@
   color: black;
   border-radius: 2rem;
   border-color: black;
-  /* border-style: double; */
   border-width: 10px;
 }
 
@@ -25,4 +24,20 @@
 }
 .verde {
   background-color: green;
+}
+
+#totalCarrito {
+  color: beige;
+  background-color: rgb(215, 65, 65);
+  border-radius: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+}
+
+.elementoCarrito {
+  border-bottom: solid dashed;
+  border-bottom: dashed;
+  border-width: 1px;
+  background-color: rgb(249, 247, 247);
 }
