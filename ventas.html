@@ -64,6 +64,9 @@
                   </div>            
               </div>
             </div>
+
+            <button class="btn btnCarrito mx-5" id='myBtn'><i class="fa-solid fa-cart-shopping mx-3 carritoIcon"></i></button>
+
             <form class="d-flex" role="search" id='form'>
               <input
                 class="form-control me-2"
@@ -80,18 +83,23 @@
         </div>
       </nav>
 
+      <div id="myModal" class="modal">
 
+        <!-- Modal content -->
+        <div class="container close">
+          <div class="row my-4 justify-content-between" id="elementosCarrito">        
+          </div>
+          <div class="row my-4 justify-content-end" >
+          <div class="col-6" id="precioTotal"></div></div>
+          </div>
+      
+      </div>
       <div class="container my-4">
         <div class="row" id="carritoElements" >
         </div>
       </div>
-      <div class="container">
-        <div class="row my-4 justify-content-between">
-          <div class="col-4" id="elementosCarrito"></div>
-          <div class="col-6 my-4" id="precioTotal"></div>
-        </div>
-        </div>
-      </div>
+
+
 
       <table id="tablaProductos" class="display" style="width:100%">
         <thead>
