@@ -174,9 +174,9 @@ function precioTotalFunc(preciosItems, database) {
     });
   });
 
-  let miNodoPrecioTotal = document.createElement("col-6");
+  let miNodoPrecioTotal = document.createElement("col");
   miNodoPrecioTotal.setAttribute("id", "totalCarrito");
-  miNodoPrecioTotal.classList.add("text-center");
+  miNodoPrecioTotal.classList.add("text-center", "container-fuild");
   miNodoPrecioTotal.textContent = `Total = $ ${precioCompra}`;
   if (precioTotal.hasChildNodes()) {
     var totalDiv = document.getElementById("totalCarrito");
