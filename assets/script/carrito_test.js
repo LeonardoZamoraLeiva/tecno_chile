@@ -176,6 +176,7 @@ function precioTotalFunc(preciosItems, database) {
 
   let miNodoPrecioTotal = document.createElement("col-6");
   miNodoPrecioTotal.setAttribute("id", "totalCarrito");
+  miNodoPrecioTotal.classList.add("text-center");
   miNodoPrecioTotal.textContent = `Total = $ ${precioCompra}`;
   if (precioTotal.hasChildNodes()) {
     var totalDiv = document.getElementById("totalCarrito");
@@ -187,7 +188,11 @@ function precioTotalFunc(preciosItems, database) {
 
   let miNodoTotalProductos = document.createElement("p");
   miNodoTotalProductos.setAttribute("id", "totalProductosActual");
-  miNodoTotalProductos.textContent = `${productosTotal} productos`;
+  if (productosTotal == 1) {
+    miNodoTotalProductos.textContent = `${productosTotal} producto`;
+  } else {
+    miNodoTotalProductos.textContent = `${productosTotal} productos`;
+  }
   if (document.getElementById("0Elementos")) {
     var nuevoDiv = document.getElementById("0Elementos");
     totalProductos.removeChild(nuevoDiv);
