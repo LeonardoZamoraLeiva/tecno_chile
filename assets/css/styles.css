@@ -59,6 +59,7 @@
 
 /* The Modal (background) */
 .modal {
+  /* -webkit-animation: fadeIn 0.5s ease; */
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   padding-top: 100px;
@@ -67,6 +68,7 @@
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0, 0, 0, 0.4); /* Fallback color */
+  transition: all 0.5s ease-in-out; /*make it smooth*/
 }
 
 /* Modal Content/Box */
@@ -87,15 +89,23 @@
 
 /* The Close Button */
 .close {
-  color: #aaa;
+  color: rgb(0, 0, 0);
   float: right;
   font-size: 28px;
   font-weight: bold;
+  justify-content: space-between;
 }
 
 .close:hover,
 .close:focus {
-  color: black;
+  color: rgb(129, 120, 120);
   text-decoration: none;
   cursor: pointer;
+}
+
+.fotosCarro {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 20%;
 }

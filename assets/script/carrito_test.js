@@ -105,7 +105,6 @@ let productos = [
 const divisa = "$";
 let productosCarrito = document.getElementById("carritoElements");
 let elementosCarrito = document.getElementById("elementosCarrito");
-let preciosCarrito = document.getElementById("preciosCarrito");
 let precioTotal = document.getElementById("precioTotal");
 let totalProductos = document.getElementById("totalProductos");
 // Lista de carrito
@@ -119,10 +118,29 @@ function removeDuplicates(arr) {
 function crearElementosCarrito(object) {
   Object.entries(object).forEach((entry) => {
     const miNodoCarrito = document.createElement("div");
+    const miNodoFullItem = document.createElement("div");
+    miNodoFullItem.classList.add("col-6");
     const [key, value] = entry;
-    miNodoCarrito.textContent = `${key}  x   ${value}`;
+    miNodoFullItem.textContent = `${key}  x   ${value}`;
+    const miNodoCarritoFoto = document.createElement("img");
+    productos.forEach((info) => {
+      if (key == info.Nombre) {
+        miNodoCarritoFoto.setAttribute("src", info.imagen);
+        miNodoCarritoFoto.classList.add("fotosCarro");
+      }
+    });
+
+    miNodoCarrito.classList.add(
+      "row",
+      "justify-content-around",
+      "align-items-center",
+      "carritoDiv"
+    );
     miNodoCarrito.classList.add("elementoCarrito", "my-2");
     miNodoCarrito.setAttribute("id", key);
+    miNodoCarrito.appendChild(miNodoCarritoFoto);
+    miNodoCarrito.appendChild(miNodoFullItem);
+
     if (elementosCarrito.hasChildNodes()) {
       if (document.getElementById(key)) {
         var nuevoDiv = document.getElementById(key);
@@ -264,21 +282,16 @@ $(document).ready(function () {
 });
 
 var modal = document.getElementById("myModal");
-
-// Get the button that opens the modal
 var btn = document.getElementById("myBtn");
-
-// Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks on the button, open the modal
 btn.onclick = function () {
-  modal.style.display = "block";
-};
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function () {
-  modal.style.display = "none";
+  if (modal.style.display == "block") {
+    modal.style.display = "none";
+  } else {
+    modal.style.display = "block";
+  }
 };
 
 // When the user clicks anywhere outside of the modal, close it
