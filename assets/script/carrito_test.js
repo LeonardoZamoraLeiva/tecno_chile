@@ -107,6 +107,7 @@ let productosCarrito = document.getElementById("carritoElements");
 let elementosCarrito = document.getElementById("elementosCarrito");
 let preciosCarrito = document.getElementById("preciosCarrito");
 let precioTotal = document.getElementById("precioTotal");
+let totalProductos = document.getElementById("totalProductos");
 // Lista de carrito
 let nombresItems = [];
 var preciosItems = {};
@@ -120,11 +121,15 @@ function crearElementosCarrito(object) {
     const miNodoCarrito = document.createElement("div");
     const [key, value] = entry;
     miNodoCarrito.textContent = `${key}  x   ${value}`;
-    miNodoCarrito.classList.add("elementoCarrito");
+    miNodoCarrito.classList.add("elementoCarrito", "my-2");
     miNodoCarrito.setAttribute("id", key);
     if (elementosCarrito.hasChildNodes()) {
       if (document.getElementById(key)) {
         var nuevoDiv = document.getElementById(key);
+        elementosCarrito.removeChild(nuevoDiv);
+        elementosCarrito.appendChild(miNodoCarrito);
+      } else if (document.getElementById("sinElementos")) {
+        var nuevoDiv = document.getElementById("sinElementos");
         elementosCarrito.removeChild(nuevoDiv);
         elementosCarrito.appendChild(miNodoCarrito);
       } else {
@@ -138,15 +143,17 @@ function crearElementosCarrito(object) {
 
 function precioTotalFunc(preciosItems, database) {
   var precioCompra = 0;
+  var productosTotal = 0;
   Object.entries(preciosItems).forEach((entry) => {
     const [key, value] = entry;
     database.forEach((info) => {
       if (key == info.Nombre) {
         console.log(info.Precio);
         precioCompra = precioCompra + info.Precio * value;
+        productosTotal = productosTotal + value;
       }
+      console.log(productosTotal);
     });
-    console.log(precioCompra);
   });
 
   let miNodoPrecioTotal = document.createElement("col-4");
@@ -158,6 +165,19 @@ function precioTotalFunc(preciosItems, database) {
     precioTotal.appendChild(miNodoPrecioTotal);
   } else {
     precioTotal.appendChild(miNodoPrecioTotal);
+  }
+
+  let miNodoTotalProductos = document.createElement("p");
+  miNodoTotalProductos.setAttribute("id", "totalProductosActual");
+  miNodoTotalProductos.textContent = `${productosTotal} productos`;
+  if (document.getElementById("0Elementos")) {
+    var nuevoDiv = document.getElementById("0Elementos");
+    totalProductos.removeChild(nuevoDiv);
+    totalProductos.appendChild(miNodoTotalProductos);
+  } else if (document.getElementById("totalProductosActual")) {
+    var totalDiv = document.getElementById("totalProductosActual");
+    totalProductos.removeChild(totalDiv);
+    totalProductos.appendChild(miNodoTotalProductos);
   }
 }
 

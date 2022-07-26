@@ -83,14 +83,20 @@
         </div>
       </nav>
 
-      <div id="myModal" class="modal">
+      <div class="modal" id="myModal">
 
         <!-- Modal content -->
-        <div class="container close">
-          <div class="row my-4 justify-content-between" id="elementosCarrito">        
+        <div class="container modal-content ">
+          <div class="row mt-5 align-content-start"> 
+            <div class="col-2 productosStyle text-center">Carro  |</div>
+            <div class='col-4 productosStyle' id="totalProductos"> <p id="0Elementos">0 Productos </p></div>
           </div>
-          <div class="row my-4 justify-content-end" >
-          <div class="col-6" id="precioTotal"></div></div>
+          <hr class="solid">
+          <div class="row justify-content-between close " ><div class="col" id="elementosCarrito"> <p id="sinElementos"> No hay productos en el carro </p></div>        
+          </div>
+          <hr class="solid">
+          <div class="row justify-content-end close" >
+          <div class="col-6 my-5" id="precioTotal"></div></div>
           </div>
       
       </div>
