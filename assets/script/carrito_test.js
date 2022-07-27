@@ -107,7 +107,7 @@ let productosCarrito = document.getElementById("carritoElements");
 let elementosCarrito = document.getElementById("elementosCarrito");
 let precioTotal = document.getElementById("precioTotal");
 let totalProductos = document.getElementById("totalProductos");
-let botonVaciarCarrito = document.getElementById("botonVaciarCarrito")
+let botonVaciarCarrito = document.getElementById("botonVaciarCarrito");
 // Lista de carrito
 var nombresItems = [];
 var preciosItems = {};
@@ -115,46 +115,145 @@ var preciosItems = {};
 function vaciarCarrito() {
   nombresItems = [];
   preciosItems = {};
+  if (elementosCarrito.hasChildNodes()) {
+    elementosCarrito.textContent = "";
+    let nodoOriginalElementosCarrito = document.createElement("p");
+    nodoOriginalElementosCarrito.textContent = "No hay productos en el carro";
+    nodoOriginalElementosCarrito.setAttribute("id", "sinElementos");
+    elementosCarrito.appendChild(nodoOriginalElementosCarrito);
+  }
+  if (precioTotal.hasChildNodes()) {
+    precioTotal.textContent = "";
+  }
+  if (totalProductos.hasChildNodes()) {
+    totalProductos.textContent = "";
+    let nodoOriginalTotalProductos = document.createElement("p");
+    nodoOriginalTotalProductos.textContent = "0 productos";
+    nodoOriginalTotalProductos.setAttribute("id", "0Elementos");
+    totalProductos.appendChild(nodoOriginalTotalProductos);
+  }
 }
 
 function removeDuplicates(arr) {
   return arr.filter((item, index) => arr.indexOf(item) === index);
 }
 
+// precioTotalFunc(preciosItems, productos);
+
+function substractElement(thisobj) {
+  console.log(nombresItems);
+  let thisId = thisobj.id;
+  productos.forEach((info) => {
+    if (thisId == info.Nombre) {
+      for (var i = 0; i < nombresItems.length; i++) {
+        if (nombresItems[i] === thisId) {
+          nombresItems.splice(i, 1);
+          break;
+        }
+      }
+    }
+    const preciosItems = {};
+    nombresItems.forEach(function (x) {
+      preciosItems[x] = (preciosItems[x] || 0) + 1;
+    });
+    console.log(preciosItems);
+    crearElementosCarrito(preciosItems);
+    precioTotalFunc(preciosItems, productos);
+  });
+}
+
+function addElement(thisobj) {
+  console.log(nombresItems);
+  let thisId = thisobj.id;
+  productos.forEach((info) => {
+    if (thisId == info.Nombre) {
+      for (var i = 0; i < nombresItems.length; i++) {
+        if (nombresItems[i] === thisId) {
+          nombresItems.push(thisId);
+          break;
+        }
+      }
+    }
+    const preciosItems = {};
+    nombresItems.forEach(function (x) {
+      preciosItems[x] = (preciosItems[x] || 0) + 1;
+    });
+    console.log(preciosItems);
+    crearElementosCarrito(preciosItems);
+    precioTotalFunc(preciosItems, productos);
+  });
+}
+
 function crearElementosCarrito(object) {
   Object.entries(object).forEach((entry) => {
-    const miNodoCarrito = document.createElement("div");
-    const miNodoFullItem = document.createElement("div");
-    miNodoFullItem.classList.add("col-6");
     const [key, value] = entry;
-    miNodoFullItem.textContent = `${key}  x   ${value}`;
+    const miNodoCarrito = document.createElement("div");
+    miNodoCarrito.classList.add(
+      "elementoCarrito",
+      "my-3",
+      "row",
+      "justify-content-between"
+    );
+    miNodoCarrito.setAttribute("id", key);
+    const miNodoFullText = document.createElement("div");
+    miNodoFullText.classList.add("col-4");
+    // miNodoFull.classList.add("elementoCarrito", "my-2");
+    const miNodoNombreItem = document.createElement("div");
+    miNodoNombreItem.classList.add("col-4");
+    miNodoNombreItem.textContent = `${key}`;
+    // console.log(value);
+    const miNodoCantidadItem = document.createElement("div");
+    miNodoCantidadItem.classList.add("col-4");
+    // miNodoCantidadItem.setAttribute("id", `${key}${value}`);
+    miNodoCantidadItem.textContent = `${value}`;
+
     const miNodoCarritoFoto = document.createElement("img");
+    const botonAgregar = document.createElement("button");
+    const botonRestar = document.createElement("button");
     productos.forEach((info) => {
       if (key == info.Nombre) {
         miNodoCarritoFoto.setAttribute("src", info.imagen);
         miNodoCarritoFoto.classList.add("fotosCarro");
+        var idCantidad = info.Codigo;
+        miNodoCantidadItem.setAttribute("id", info.Codigo);
+        botonAgregar.setAttribute("id", info.Nombre);
+        botonRestar.setAttribute("id", info.Nombre);
       }
     });
 
     //botones Agregar y restar
-    const botonAgregar = document.createElement("button")
-    botonAgregar.classList.add("col-1", "btn", "btn-danger", "estiloBoton", "text-center")
-    botonAgregar.textContent = "+"
-  
-    const botonRestar = document.createElement("button")
-    botonRestar.classList.add("col-1", "btn", "btn-danger", "estiloBoton")
-    botonRestar.textContent = "-"
-    
+
+    botonAgregar.classList.add(
+      "col-1",
+      "btn",
+      "btn-danger",
+      "estiloBoton",
+      "text-center"
+    );
+    console.log();
+    botonAgregar.onclick = function () {
+      addElement(this);
+    };
+    botonAgregar.textContent = "+";
+
+    botonRestar.classList.add("col-1", "btn", "btn-danger", "estiloBoton");
+    botonRestar.onclick = function () {
+      substractElement(this);
+    };
+
+    botonRestar.textContent = "-";
+
     miNodoCarrito.classList.add(
       "row",
       "justify-content-around",
       "align-items-center",
       "carritoDiv"
     );
-    miNodoCarrito.classList.add("elementoCarrito", "my-2");
-    miNodoCarrito.setAttribute("id", key);
+    miNodoFullText.appendChild(miNodoNombreItem);
+    miNodoFullText.appendChild(miNodoCantidadItem);
+
     miNodoCarrito.appendChild(miNodoCarritoFoto);
-    miNodoCarrito.appendChild(miNodoFullItem);
+    miNodoCarrito.appendChild(miNodoFullText);
     miNodoCarrito.appendChild(botonAgregar);
     miNodoCarrito.appendChild(botonRestar);
 
@@ -181,32 +280,31 @@ function precioTotalFunc(preciosItems, database) {
   var productosTotal = 0;
   Object.entries(preciosItems).forEach((entry) => {
     const [key, value] = entry;
+
+    // const cantidad = document.getElementById;
     database.forEach((info) => {
       if (key == info.Nombre) {
-        console.log(info.Precio);
         precioCompra = precioCompra + info.Precio * value;
         productosTotal = productosTotal + value;
       }
-      console.log(productosTotal);
     });
   });
 
+  //boton vaciar carrito
+  let botonVaciar = document.createElement("button");
+  botonVaciar.setAttribute("id", "bVaciar");
+  botonVaciar.setAttribute("onclick", "vaciarCarrito()");
+  botonVaciar.classList.add("btn", "btn-warning");
+  botonVaciar.textContent = "Vaciar Carrito";
+  if (botonVaciarCarrito.hasChildNodes()) {
+    var totalDiv = document.getElementById("bVaciar");
+    botonVaciarCarrito.removeChild(totalDiv);
+    botonVaciarCarrito.appendChild(botonVaciar);
+  } else {
+    botonVaciarCarrito.appendChild(botonVaciar);
+  }
 
-//boton vaciar carrito
-let botonVaciar = document.createElement("button");
-botonVaciar.setAttribute("id", "bVaciar");
-botonVaciar.setAttribute("onclick", "vaciarCarrito()");
-botonVaciar.classList.add("btn", "btn-warning");
-botonVaciar.textContent = "Vaciar Carrito";  
-if (botonVaciarCarrito.hasChildNodes()) {
-  var totalDiv = document.getElementById("bVaciar");
-  botonVaciarCarrito.removeChild(totalDiv);
-  botonVaciarCarrito.appendChild(botonVaciar);
-} else {
-  botonVaciarCarrito.appendChild(botonVaciar);
-}
-
-let miNodoPrecioTotal = document.createElement("col");
+  let miNodoPrecioTotal = document.createElement("col");
   miNodoPrecioTotal.setAttribute("id", "totalCarrito");
   miNodoPrecioTotal.classList.add("text-center", "container-fluid");
   miNodoPrecioTotal.textContent = `Total = $ ${precioCompra}`;
@@ -217,7 +315,7 @@ let miNodoPrecioTotal = document.createElement("col");
   } else {
     precioTotal.appendChild(miNodoPrecioTotal);
   }
-// carro N productos
+  // carro N productos
   let miNodoTotalProductos = document.createElement("p");
   miNodoTotalProductos.setAttribute("id", "totalProductosActual");
   if (productosTotal == 1) {
@@ -237,13 +335,11 @@ let miNodoPrecioTotal = document.createElement("col");
 }
 
 function agregarCarrito(info) {
-  console.log(info);
   if (info.Stock === "Si") {
     nombresItems.push(info.Nombre);
-    var preciosItems = removeDuplicates(nombresItems);
+    var preciosItems = {};
     nombresItems.forEach((x) => {
       preciosItems[x] = (preciosItems[x] || 0) + 1;
-      preciosItems.shift();
     });
   } else alert("Este elemento no está disponible");
 
