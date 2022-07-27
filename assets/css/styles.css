@@ -109,3 +109,9 @@
   padding: 5px;
   width: 20%;
 }
+
+.estiloBoton {
+  font-size: 1rem;
+  align-items: center;
+  vertical-align: middle;
+}
