@@ -141,7 +141,6 @@ function removeDuplicates(arr) {
 // precioTotalFunc(preciosItems, productos);
 
 function substractElement(thisobj) {
-  console.log(nombresItems);
   let thisId = thisobj.id;
   productos.forEach((info) => {
     if (thisId == info.Nombre) {
@@ -156,14 +155,26 @@ function substractElement(thisobj) {
     nombresItems.forEach(function (x) {
       preciosItems[x] = (preciosItems[x] || 0) + 1;
     });
-    console.log(preciosItems);
+  
     crearElementosCarrito(preciosItems);
     precioTotalFunc(preciosItems, productos);
   });
+  if (!nombresItems.includes(thisobj.id)){
+    //objVac = document.getElementById(thisId)
+    //objVac.textContent = "";
+    var objVac = document.getElementById(thisobj.id)
+    elementosCarrito.removeChild(objVac);
+  };
+
+  if (nombresItems.length == 0){
+    let nodoOriginalElementosCarrito = document.createElement("p");
+    nodoOriginalElementosCarrito.textContent = "No hay productos en el carro";
+    nodoOriginalElementosCarrito.setAttribute("id", "sinElementos");
+    elementosCarrito.appendChild(nodoOriginalElementosCarrito);
+  }
 }
 
 function addElement(thisobj) {
-  console.log(nombresItems);
   let thisId = thisobj.id;
   productos.forEach((info) => {
     if (thisId == info.Nombre) {
@@ -178,7 +189,6 @@ function addElement(thisobj) {
     nombresItems.forEach(function (x) {
       preciosItems[x] = (preciosItems[x] || 0) + 1;
     });
-    console.log(preciosItems);
     crearElementosCarrito(preciosItems);
     precioTotalFunc(preciosItems, productos);
   });
