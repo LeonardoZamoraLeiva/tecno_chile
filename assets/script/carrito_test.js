@@ -155,18 +155,18 @@ function substractElement(thisobj) {
     nombresItems.forEach(function (x) {
       preciosItems[x] = (preciosItems[x] || 0) + 1;
     });
-  
+
     crearElementosCarrito(preciosItems);
     precioTotalFunc(preciosItems, productos);
   });
-  if (!nombresItems.includes(thisobj.id)){
+  if (!nombresItems.includes(thisobj.id)) {
     //objVac = document.getElementById(thisId)
     //objVac.textContent = "";
-    var objVac = document.getElementById(thisobj.id)
+    var objVac = document.getElementById(thisobj.id);
     elementosCarrito.removeChild(objVac);
-  };
+  }
 
-  if (nombresItems.length == 0){
+  if (nombresItems.length == 0) {
     let nodoOriginalElementosCarrito = document.createElement("p");
     nodoOriginalElementosCarrito.textContent = "No hay productos en el carro";
     nodoOriginalElementosCarrito.setAttribute("id", "sinElementos");
@@ -215,7 +215,7 @@ function crearElementosCarrito(object) {
     const miNodoCantidadItem = document.createElement("div");
     miNodoCantidadItem.classList.add("col-4");
     // miNodoCantidadItem.setAttribute("id", `${key}${value}`);
-    miNodoCantidadItem.textContent = `${value}`;
+    miNodoCantidadItem.textContent = `x${value}`;
 
     const miNodoCarritoFoto = document.createElement("img");
     const botonAgregar = document.createElement("button");
