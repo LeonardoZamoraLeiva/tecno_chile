@@ -4,22 +4,44 @@ $(document).ready(function () {
 
 // var nombreCurrent = ''
 function preguntarNombre() {
-  var name = prompt("Dinos tu nombre: ");
-  if (name == null || name == "") {
-    txt = "No Name provided";
+  if (localStorage.getItem("usuario")) {
+    let miStorage = localStorage.getItem("usuario");
+    if (miStorage) {
+      var paragraph = document.getElementById("nombreUsuario");
+      var txt = document.createTextNode(`Bienvenido ${miStorage}`);
+      paragraph.classList.add("nameStyle");
+      paragraph.appendChild(txt);
+    }
   } else {
-    txt = `Bienvenido ${name}!`;
-    localStorage.setItem("usuario", name);
-    var miStorage = localStorage.getItem("usuario");
-    console.log(miStorage);
+    var name = prompt("Dinos tu nombre: ");
+    if (name == null || name == "") {
+      txt = "No Name provided";
+    } else {
+      txt = `Bienvenido ${name}!`;
+      localStorage.setItem("usuario", name);
+      var miStorage = localStorage.getItem("usuario");
+      console.log(miStorage);
+    }
+    alert(txt);
+    if (txt != "No Name provided") {
+      var paragraph = document.getElementById("nombreUsuario");
+      var txt = document.createTextNode(`Bienvenido ${name}`);
+      paragraph.classList.add("nameStyle");
+      paragraph.appendChild(txt);
+    }
   }
-  alert(txt);
-  if (txt != "No Name provided") {
-    // var name = document.getElementById("nombreUsuario");
-    var paragraph = document.getElementById("nombreUsuario");
-    var txt = document.createTextNode(`Bienvenido ${name}`);
-    paragraph.classList.add("nameStyle");
-    paragraph.appendChild(txt);
+}
+
+var hours = 1; // to clear the localStorage after 1 hour
+// (if someone want to clear after 8hrs simply change hours=8)
+var now = new Date().getTime();
+var setupTime = localStorage.getItem("setupTime");
+if (setupTime == null) {
+  localStorage.setItem("setupTime", now);
+} else {
+  if (now - setupTime > hours * 10 * 60 * 1000) {
+    localStorage.clear();
+    localStorage.setItem("setupTime", now);
   }
 }
 

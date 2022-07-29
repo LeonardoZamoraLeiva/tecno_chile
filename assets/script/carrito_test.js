@@ -102,8 +102,6 @@ let productos = [
   },
 ];
 
-console.log(localStorage.getItem("usuario"));
-
 const divisa = "$";
 let productosCarrito = document.getElementById("carritoElements");
 let elementosCarrito = document.getElementById("elementosCarrito");
@@ -111,7 +109,10 @@ let precioTotal = document.getElementById("precioTotal");
 let totalProductos = document.getElementById("totalProductos");
 let botonVaciarCarrito = document.getElementById("botonVaciarCarrito");
 let iconoCarrito = document.getElementById("iconoCarrito");
+
+//elementos originales
 let animacionCarritoOriginal = document.getElementById("sinElementos");
+let iconoCarritoOriginal = document.getElementById("0ElementosCarro");
 // Lista de carrito
 var nombresItems = [];
 var preciosItems = {};
@@ -135,10 +136,7 @@ function vaciarCarrito() {
   }
   if (iconoCarrito.hasChildNodes()) {
     iconoCarrito.textContent = "";
-    let nodoOriginalTotalProductos = document.createElement("p");
-    nodoOriginalTotalProductos.textContent = "0";
-    nodoOriginalTotalProductos.setAttribute("id", "0ElementosCarro");
-    iconoCarrito.appendChild(nodoOriginalTotalProductos);
+    iconoCarrito.appendChild(iconoCarritoOriginal);
   }
 }
 
@@ -171,10 +169,8 @@ function substractElement(thisobj) {
   }
 
   if (nombresItems.length == 0) {
-    let nodoOriginalElementosCarrito = document.createElement("p");
-    nodoOriginalElementosCarrito.textContent = "No hay productos en el carro";
-    nodoOriginalElementosCarrito.setAttribute("id", "sinElementos");
-    elementosCarrito.appendChild(nodoOriginalElementosCarrito);
+    elementosCarrito.appendChild(animacionCarritoOriginal);
+    precioTotal.textContent = "";
   }
 }
 
@@ -210,12 +206,14 @@ function crearElementosCarrito(object) {
     );
     miNodoCarrito.setAttribute("id", key);
     const miNodoFullText = document.createElement("div");
-    miNodoFullText.classList.add("col-4");
+    miNodoFullText.classList.add("col-3");
+    const miNodoBotones = document.createElement("div");
+    miNodoBotones.classList.add("col-lg-3", "col-md-8", "mx-1", "text-center");
     const miNodoNombreItem = document.createElement("div");
-    miNodoNombreItem.classList.add("col-4");
+    miNodoNombreItem.classList.add("col", "elementoEnElCarro", "text-center");
     miNodoNombreItem.textContent = `${key}`;
     const miNodoCantidadItem = document.createElement("div");
-    miNodoCantidadItem.classList.add("col-4");
+    miNodoCantidadItem.classList.add("col", "elementoEnElCarro", "text-center");
     miNodoCantidadItem.textContent = `x${value}`;
 
     const miNodoCarritoFoto = document.createElement("img");
@@ -225,7 +223,6 @@ function crearElementosCarrito(object) {
       if (key == info.Nombre) {
         miNodoCarritoFoto.setAttribute("src", info.imagen);
         miNodoCarritoFoto.classList.add("fotosCarro");
-        var idCantidad = info.Codigo;
         miNodoCantidadItem.setAttribute("id", info.Codigo);
         botonAgregar.setAttribute("id", info.Nombre);
         botonRestar.setAttribute("id", info.Nombre);
@@ -235,19 +232,26 @@ function crearElementosCarrito(object) {
     //botones Agregar y restar
 
     botonAgregar.classList.add(
-      "col-1",
+      "col-lg-10",
+      "col-md-4",
+      // "col-sm-2",
       "btn",
       "btn-danger",
-      "estiloBoton",
-      "text-center"
+      "estiloBoton"
     );
-    console.log();
     botonAgregar.onclick = function () {
       addElement(this);
     };
     botonAgregar.textContent = "+";
 
-    botonRestar.classList.add("col-1", "btn", "btn-danger", "estiloBoton");
+    botonRestar.classList.add(
+      "col-lg-10",
+      "col-md-4",
+      // "col-sm-2",
+      "btn",
+      "btn-danger",
+      "estiloBoton"
+    );
     botonRestar.onclick = function () {
       substractElement(this);
     };
@@ -258,15 +262,17 @@ function crearElementosCarrito(object) {
       "row",
       "justify-content-around",
       "align-items-center",
-      "carritoDiv"
+      "carritoDiv",
+      "border"
     );
+
+    miNodoBotones.appendChild(botonAgregar);
+    miNodoBotones.appendChild(botonRestar);
     miNodoFullText.appendChild(miNodoNombreItem);
     miNodoFullText.appendChild(miNodoCantidadItem);
-
     miNodoCarrito.appendChild(miNodoCarritoFoto);
     miNodoCarrito.appendChild(miNodoFullText);
-    miNodoCarrito.appendChild(botonAgregar);
-    miNodoCarrito.appendChild(botonRestar);
+    miNodoCarrito.appendChild(miNodoBotones);
 
     if (elementosCarrito.hasChildNodes()) {
       if (document.getElementById(key)) {
@@ -344,6 +350,7 @@ function precioTotalFunc(preciosItems, database) {
   //numero de productos al lado del carrito
   let miNodoElementosCarro = document.createElement("p");
   miNodoElementosCarro.setAttribute("id", "totalProductosActualCarro");
+  miNodoElementosCarro.classList.add("mx-2");
   miNodoElementosCarro.textContent = `${productosTotal}`;
   if (document.getElementById("0ElementosCarro")) {
     var nuevoDiv = document.getElementById("0ElementosCarro");
@@ -426,6 +433,8 @@ $(document).ready(function () {
 
   $("#tablaProductos").DataTable({
     data: productos,
+    scrollX: true,
+
     columns: [
       { data: "Nombre" },
       { data: "Categoria" },
@@ -458,7 +467,6 @@ window.onclick = function (event) {
 
 function colocarNombre() {
   let miStorage = localStorage.getItem("usuario");
-  console.log(localStorage.getItem("usuario"));
   if (miStorage) {
     var paragraph = document.getElementById("nombreUsuario");
     var txt = document.createTextNode(`Bienvenido ${miStorage}`);

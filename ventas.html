@@ -43,9 +43,9 @@
   </head>
   <body onload="colocarNombre()">
     <nav class="navbar navbar-expand-lg bg-success sticky-top" id="navegacion">
-      <div class="container-fluid">
+      <div class="container-fluid justify-content-start">
         <button
-          class="navbar-toggler"
+          class="navbar-toggler border col-2"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarSupportedContent"
@@ -86,15 +86,18 @@
             </li>
           </ul>
         </div>
-        <div class="col-auto p-3 navbar-brand" id="nombreUsuario"></div>
+        <div
+          class="col-md-auto col-sm-6 mx-4 p-1 navbar-brand border container-fluid"
+          id="nombreUsuario"
+        ></div>
 
-        <button class="btn btnCarrito mx-5" id="myBtn">
-          <div class="row justify-content-around align-items-center">
-            <div class="col-4">
-              <i class="fa-solid fa-cart-shopping carritoIcon"></i>
+        <button class="btn btnCarrito col-md-1 col-sm-2" id="myBtn">
+          <div class="row">
+            <div class="col-1 justify-content-start">
+              <i class="fa-solid fa-cart-shopping carritoIcon"> </i>
             </div>
-            <div class="col-6" id="iconoCarrito">
-              <p id="0ElementosCarro">0</p>
+            <div class="col-2" id="iconoCarrito">
+              <p id="0ElementosCarro" class="mx-2">0</p>
             </div>
           </div>
         </button>
@@ -103,7 +106,7 @@
 
     <div class="modal" id="myModal">
       <!-- Modal content -->
-      <div class="container modal-content container-fluid">
+      <div class="container modal-content">
         <div class="row mt-5 align-content-start">
           <div class="col-4 productosStyle text-center">Carro |</div>
           <div class="col-6 productosStyle" id="totalProductos">
@@ -146,7 +149,7 @@
       </thead>
     </table>
 
-    <table id="example" class="display" width="100%"></table>
+    <table id="example" class="display"></table>
 
     <footer id="footer">
       <!-- Footer -->
