@@ -455,3 +455,14 @@ window.onclick = function (event) {
     modal.style.display = "none";
   }
 };
+
+function colocarNombre() {
+  let miStorage = localStorage.getItem("usuario");
+  console.log(localStorage.getItem("usuario"));
+  if (miStorage) {
+    var paragraph = document.getElementById("nombreUsuario");
+    var txt = document.createTextNode(`Bienvenido ${miStorage}`);
+    paragraph.classList.add("nameStyle");
+    paragraph.appendChild(txt);
+  }
+}

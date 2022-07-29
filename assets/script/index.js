@@ -23,16 +23,6 @@ function preguntarNombre() {
   }
 }
 
-function preguntarNombre() {
-  if (miStorage) {
-    // var name = document.getElementById("nombreUsuario");
-    var paragraph = document.getElementById("nombreUsuario");
-    var txt = document.createTextNode(`Bienvenido ${name}`);
-    paragraph.classList.add("nameStyle");
-    paragraph.appendChild(txt);
-  }
-}
-
 let i = 0;
 document.getElementById("contador").innerHTML = i;
 function contadorSuma() {
