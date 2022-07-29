@@ -397,14 +397,30 @@ function crearProductos() {
     miNodoPrecio.classList.add("card-text");
     miNodoPrecio.textContent = `${divisa}${info.Precio}`;
     // Boton
-    const miNodoBoton = document.createElement("button");
+/*     const miNodoBoton = document.createElement("button");
     miNodoBoton.classList.add("btn", "btn-primary");
     miNodoBoton.textContent = "+";
     miNodoBoton.setAttribute("marcador", info.Codigo);
     // al hacer click comienza la funcion
     miNodoBoton.onclick = function () {
-      agregarCarrito(info);
-    };
+      agregarCarrito(info); */
+      var miNodoBoton;
+    if (info.Stock == "Si") {
+      var miNodoBoton = document.createElement("button");
+      miNodoBoton.classList.add("btn", "btn-primary");
+      miNodoBoton.textContent = "+";
+      miNodoBoton.setAttribute("marcador", info.Codigo);
+      // al hacer click comienza la funcion
+      miNodoBoton.onclick = function () {
+        agregarCarrito(info);
+      };
+    } else {
+      var miNodoBoton = document.createElement("p");
+      // miNodoBoton.classList.add("btn", "btn-primary");
+      miNodoBoton.textContent = "No hay stock";
+    }
+
+  
 
     // Insertamos
     miNodoCardBody.appendChild(miNodoImagen);
