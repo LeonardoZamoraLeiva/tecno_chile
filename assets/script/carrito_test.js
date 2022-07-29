@@ -113,6 +113,7 @@ let iconoCarrito = document.getElementById("iconoCarrito");
 //elementos originales
 let animacionCarritoOriginal = document.getElementById("sinElementos");
 let iconoCarritoOriginal = document.getElementById("0ElementosCarro");
+let totalProductosOriginal = document.getElementById("totalProductos");
 // Lista de carrito
 var nombresItems = [];
 var preciosItems = {};
@@ -129,10 +130,7 @@ function vaciarCarrito() {
   }
   if (totalProductos.hasChildNodes()) {
     totalProductos.textContent = "";
-    let nodoOriginalTotalProductos = document.createElement("p");
-    nodoOriginalTotalProductos.textContent = "0 productos";
-    nodoOriginalTotalProductos.setAttribute("id", "0Elementos");
-    totalProductos.appendChild(nodoOriginalTotalProductos);
+    totalProductos.appendChild(totalProductosOriginal);
   }
   if (iconoCarrito.hasChildNodes()) {
     iconoCarrito.textContent = "";
@@ -397,8 +395,13 @@ function crearProductos() {
     miNodoPrecio.classList.add("card-text");
     miNodoPrecio.textContent = `${divisa}${info.Precio}`;
     // Boton
+<<<<<<< HEAD
 /*     const miNodoBoton = document.createElement("button");
     miNodoBoton.classList.add("btn", "btn-primary");
+=======
+    var miNodoBoton = document.createElement("button");
+    miNodoBoton.classList.add("btn", "btn-primary", "disable");
+>>>>>>> f14163d97424f7e2e28874f4e954a56149e2c4fe
     miNodoBoton.textContent = "+";
     miNodoBoton.setAttribute("marcador", info.Codigo);
     // al hacer click comienza la funcion
