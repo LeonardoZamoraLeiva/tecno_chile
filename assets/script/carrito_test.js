@@ -120,17 +120,11 @@ function vaciarCarrito() {
   if (elementosCarrito.hasChildNodes()) {
     elementosCarrito.textContent = "";
     elementosCarrito.appendChild(animacionCarritoOriginal);
-    // let nodoOriginalElementosCarrito = document.createElement("p");
-    // nodoOriginalElementosCarrito.setAttribute("img", "src='assets/images/shopping-cart-cart-svgrepo-com.svg'");
-    // nodoOriginalElementosCarrito.textContent = "No hay productos en el carro";
-    // nodoOriginalElementosCarrito.setAttribute("id", "sinElementos");
-    // elementosCarrito.appendChild(nodoOriginalElementosCarrito);
   }
   if (precioTotal.hasChildNodes()) {
     precioTotal.textContent = "";
   }
   if (totalProductos.hasChildNodes()) {
-    // let animacionCarrito =
     totalProductos.textContent = "";
     let nodoOriginalTotalProductos = document.createElement("p");
     nodoOriginalTotalProductos.textContent = "0 productos";
