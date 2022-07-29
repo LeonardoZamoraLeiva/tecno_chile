@@ -9,7 +9,9 @@ function preguntarNombre() {
     txt = "No Name provided";
   } else {
     txt = `Bienvenido ${name}!`;
-    // var nameCurrent = name
+    localStorage.setItem("usuario", name);
+    var miStorage = localStorage.getItem("usuario");
+    console.log(miStorage);
   }
   alert(txt);
   if (txt != "No Name provided") {
@@ -20,9 +22,16 @@ function preguntarNombre() {
     paragraph.appendChild(txt);
   }
 }
-// function nombrePaginas(){
 
-// }
+function preguntarNombre() {
+  if (miStorage) {
+    // var name = document.getElementById("nombreUsuario");
+    var paragraph = document.getElementById("nombreUsuario");
+    var txt = document.createTextNode(`Bienvenido ${name}`);
+    paragraph.classList.add("nameStyle");
+    paragraph.appendChild(txt);
+  }
+}
 
 let i = 0;
 document.getElementById("contador").innerHTML = i;

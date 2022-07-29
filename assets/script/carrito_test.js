@@ -102,6 +102,8 @@ let productos = [
   },
 ];
 
+console.log(localStorage.getItem("usuario"));
+
 const divisa = "$";
 let productosCarrito = document.getElementById("carritoElements");
 let elementosCarrito = document.getElementById("elementosCarrito");
