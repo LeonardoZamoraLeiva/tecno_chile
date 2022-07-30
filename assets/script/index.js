@@ -6,12 +6,10 @@ $(document).ready(function () {
 function preguntarNombre() {
   if (localStorage.getItem("usuario")) {
     let miStorage = localStorage.getItem("usuario");
-    if (miStorage) {
-      var paragraph = document.getElementById("nombreUsuario");
-      var txt = document.createTextNode(`Bienvenido ${miStorage}`);
-      paragraph.classList.add("nameStyle");
-      paragraph.appendChild(txt);
-    }
+    var paragraph = document.getElementById("nombreUsuario");
+    var txt = document.createTextNode(`Bienvenido ${miStorage}`);
+    paragraph.classList.add("nameStyle");
+    paragraph.appendChild(txt);
   } else {
     var name = prompt("Dinos tu nombre: ");
     if (name == null || name == "") {
@@ -20,7 +18,7 @@ function preguntarNombre() {
       txt = `Bienvenido ${name}!`;
       localStorage.setItem("usuario", name);
       var miStorage = localStorage.getItem("usuario");
-      console.log(miStorage);
+      // console.log(miStorage);
     }
     alert(txt);
     if (txt != "No Name provided") {
@@ -39,7 +37,7 @@ var setupTime = localStorage.getItem("setupTime");
 if (setupTime == null) {
   localStorage.setItem("setupTime", now);
 } else {
-  if (now - setupTime > hours * 10 * 60 * 1000) {
+  if (now - setupTime > hours * 1 * 60 * 1000) {
     localStorage.clear();
     localStorage.setItem("setupTime", now);
   }

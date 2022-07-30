@@ -395,19 +395,9 @@ function crearProductos() {
     miNodoPrecio.classList.add("card-text");
     miNodoPrecio.textContent = `${divisa}${info.Precio}`;
     // Boton
-<<<<<<< HEAD
-/*     const miNodoBoton = document.createElement("button");
-    miNodoBoton.classList.add("btn", "btn-primary");
-=======
-    var miNodoBoton = document.createElement("button");
-    miNodoBoton.classList.add("btn", "btn-primary", "disable");
->>>>>>> f14163d97424f7e2e28874f4e954a56149e2c4fe
-    miNodoBoton.textContent = "+";
-    miNodoBoton.setAttribute("marcador", info.Codigo);
+
     // al hacer click comienza la funcion
-    miNodoBoton.onclick = function () {
-      agregarCarrito(info); */
-      var miNodoBoton;
+    var miNodoBoton;
     if (info.Stock == "Si") {
       var miNodoBoton = document.createElement("button");
       miNodoBoton.classList.add("btn", "btn-primary");
@@ -422,8 +412,6 @@ function crearProductos() {
       // miNodoBoton.classList.add("btn", "btn-primary");
       miNodoBoton.textContent = "No hay stock";
     }
-
-  
 
     // Insertamos
     miNodoCardBody.appendChild(miNodoImagen);
@@ -466,6 +454,8 @@ $(document).ready(function () {
 
 var modal = document.getElementById("myModal");
 var btn = document.getElementById("myBtn");
+var modalCompra = document.getElementById("myModalCompra");
+var btnCompra = document.getElementById("myBtnCompra");
 var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks on the button, open the modal
@@ -478,9 +468,20 @@ btn.onclick = function () {
 };
 
 // When the user clicks anywhere outside of the modal, close it
-window.onclick = function (event) {
-  if (event.target == modal) {
+window.addEventListener("click", function (event) {
+  if (event.target == modal || event.target == modalCompra) {
     modal.style.display = "none";
+    modalCompra.style.display = "none";
+  }
+});
+
+btnCompra.onclick = function () {
+  if (nombresItems.length > 0) {
+    if (modalCompra.style.display == "block") {
+      modalCompra.style.display = "none";
+    } else {
+      modalCompra.style.display = "block";
+    }
   }
 };
 
