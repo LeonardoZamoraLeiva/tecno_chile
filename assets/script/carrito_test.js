@@ -409,7 +409,6 @@ function crearProductos() {
       };
     } else {
       var miNodoBoton = document.createElement("p");
-      // miNodoBoton.classList.add("btn", "btn-primary");
       miNodoBoton.textContent = "No hay stock";
     }
 
