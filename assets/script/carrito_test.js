@@ -121,6 +121,7 @@ var preciosItems = {};
 function vaciarCarrito() {
   nombresItems = [];
   preciosItems = {};
+  modalCompra.style.display = "none";
   if (elementosCarrito.hasChildNodes()) {
     elementosCarrito.textContent = "";
     elementosCarrito.appendChild(animacionCarritoOriginal);
@@ -169,6 +170,7 @@ function substractElement(thisobj) {
   if (nombresItems.length == 0) {
     elementosCarrito.appendChild(animacionCarritoOriginal);
     precioTotal.textContent = "";
+    modalCompra.style.display = "none";
   }
 }
 
