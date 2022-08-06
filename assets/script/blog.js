@@ -71,18 +71,36 @@ usuarios.forEach(function (usuario) {
   const miNodoText = document.createElement("p");
   miNodoText.classList.add("card-text");
   miNodoText.textContent = usuario.body;
+  const miNodoBotones = document.createElement("div");
+  miNodoBotones.classList.add("row", "justify-content-evenly");
+  const miNodoBotonUno = document.createElement("div");
+  miNodoBotonUno.classList.add("col-4");
+  const miNodoBotonDos = document.createElement("div");
+  miNodoBotonDos.classList.add("col-4");
+  //   miNodoBoton.classList.add("btn", "btn-primary");
   const miNodoBoton = document.createElement("button");
-  miNodoBoton.classList.add("btn", "btn-primary");
-  miNodoBoton.textContent = "click me!";
+  miNodoBoton.classList.add("btn", "btn-primary", "col");
+  miNodoBoton.textContent = "Display!";
   // asignamos al boton el valor del usuario.id para
   // que sea el argumento de la funcion que despliega el modal
   miNodoBoton.setAttribute("data-bs-toggle", "modal");
   miNodoBoton.setAttribute("data-bs-target", "#exampleModal");
   miNodoBoton.setAttribute("onclick", `desplegarModal(${usuario.id})`);
+  const miNodoBotonFav = document.createElement("button");
+  miNodoBotonFav.classList.add("btn", "btn-primary", "col");
+  miNodoBotonFav.textContent = "Favoritos";
   // asignamos cada chlild a su paren correspondiente
+
+  miNodoBotonUno.appendChild(miNodoBoton);
+  miNodoBotonDos.appendChild(miNodoBotonFav);
+  miNodoBotones.appendChild(miNodoBotonUno);
+  miNodoBotones.appendChild(miNodoBotonDos);
   miNodoBody.appendChild(miNodoHeader);
   miNodoBody.appendChild(miNodoText);
-  miNodoBody.appendChild(miNodoBoton);
+  miNodoBody.appendChild(miNodoBotones);
+  //   miNodoBody.appendChild(miNodoBotonDos);
+  //   miNodoBody.appendChild(miNodoBotones);
+
   miNodoTarjeta.appendChild(miNodoBody);
   miNodoColumna.appendChild(miNodoTarjeta);
 
