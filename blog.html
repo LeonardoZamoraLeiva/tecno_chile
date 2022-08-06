@@ -17,9 +17,9 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
     />
-
   </head>
-  <body>
+  <body onload="tiempo()" style="margin: 0">
+    <div id="loader"></div>
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item active" aria-current="page">Elemento 1</li>
@@ -36,7 +36,7 @@
               type="search"
               placeholder="Search"
               aria-label="Search"
-              onkeypress="return /[a-z-ñ- ]/i.test(event.key)"
+              onkeypress="return /[a-z-ñ]/i.test(event.key)"
             />
             <button class="btn btn-success" type="submit">Search</button>
           </form>
@@ -74,31 +74,33 @@
     </div>
 
     <div class="container">
-      <div class="row" id="tarjeta">
-
+      <div class="row" id="tarjeta"></div>
     </div>
 
-  <div>
-
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
-          <div class="modal-body" id="modalBody">
-            Esto es el body
-          </div>
-          <!-- <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div> -->
+          <div class="modal-body" id="modalBody">Esto es el body</div>
         </div>
       </div>
     </div>
-    </div>
+
     <footer id="footer">
       <!-- Footer -->
       <footer class="text-center text-lg-start bg-success text-muted mt-3">

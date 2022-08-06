@@ -100,9 +100,14 @@ function desplegarModal(x) {
   });
 }
 
-function Persona(nombre, edad) {
-  this.nombre;
-  this.edad;
+// Funcion para el loader
+var myVar;
+
+function tiempo() {
+  myVar = setTimeout(showPage, 3000);
 }
 
-let Rene = new Persona(Rene, 32);
+function showPage() {
+  document.getElementById("loader").style.display = "none";
+  document.getElementById("myCards").style.display = "block";
+}
