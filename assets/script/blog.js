@@ -27,3 +27,5 @@ function showPage() {
   document.getElementById("loader").style.display = "none";
   document.getElementById("myCards").style.display = "block";
 }
+
+// hola
