@@ -1,31 +1,36 @@
-const url = "https://jsonplaceholder.typicode.com/posts";
-
-const getDatos = () => {
-  return new Promise((resolve, reject) => {
-    resolve(fetch(url).then((response) => response.json()));
-  });
-};
-
-// console.log(usuarios);
-async function fectchinData() {
-  try {
-    usuarios = [];
-    const datosFetched = await getDatos();
-    for (const dato of datosFetched) {
-      usuarios.push(dato);
-      if (dato === datosFetched[19]) {
-        break;
-      }
-    }
-  } catch (err) {
-    console.log(err);
-  }
-  usuarios.forEach((usuario) => {
-    crearTarjetas(usuario);
-  });
-}
-
-fectchinData();
+let usuarios = [
+  {
+    userId: 1,
+    id: 1,
+    title:
+      "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+    body: "quia et suscipit suscipit recusandae consequuntur expedita et um reprehenderit molestiae ut ut quas totam nostrum rerum est autem sunt rem eveniet architecto",
+  },
+  {
+    userId: 1,
+    id: 2,
+    title: "qui est esse",
+    body: "est rerum tempore vitae sequi sint nihil reprehenderit dolor beatae ea dolores neque fugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis qui aperiam non debitis possimus qui neque nisi nulla",
+  },
+  {
+    userId: 1,
+    id: 3,
+    title: "ea molestias quasi exercitationem repellat qui ipsa sit aut",
+    body: "et iusto sed quo iure voluptatem occaecati omnis eligendi aut ad voluptatem doloribus vel accusantium quis pariatur molestiae porro eius odio et labore et velit aut",
+  },
+  {
+    userId: 1,
+    id: 4,
+    title: "eum et est occaecati",
+    body: "ullam et saepe reiciendis voluptatem adipisci sit amet autem assumenda provident rerum culpa quis hic commodi nesciunt rem tenetur doloremque ipsam iure quis sunt voluptatem rerum illo velit",
+  },
+  {
+    userId: 1,
+    id: 5,
+    title: "nesciunt quas odio",
+    body: "repudiandae veniam quaerat sunt sed alias aut fugiat sit autem sed est voluptatem omnis possimus esse voluptatibus quis est aut tenetur dolor neque",
+  },
+];
 
 let tarjeta = document.getElementById("tarjeta");
 let modalTile = document.getElementById("exampleModalLabel");
@@ -51,15 +56,8 @@ function soloLetras(e) {
 }
 
 // crear tarjetas desde el array usuarios
-
-// console.log(usuarios);
-let tester = function () {
-  for (let i = 0; i < 3; i++) {
-    console.log(usuarios[i]);
-  }
-};
-
-let crearTarjetas = function (usuario) {
+usuarios.forEach(function (usuario) {
+  // creamos los divs necesarios para crear c/tarjeta
   const miNodoColumna = document.createElement("div");
   miNodoColumna.classList.add("col-4");
   const miNodoTarjeta = document.createElement("div");
@@ -72,7 +70,7 @@ let crearTarjetas = function (usuario) {
   miNodoHeader.textContent = usuario.title;
   const miNodoText = document.createElement("p");
   miNodoText.classList.add("card-text");
-  miNodoText.textContent = usuario.title;
+  miNodoText.textContent = usuario.body;
   const miNodoBotones = document.createElement("div");
   miNodoBotones.classList.add("row", "justify-content-evenly");
   const miNodoBotonUno = document.createElement("div");
@@ -87,7 +85,6 @@ let crearTarjetas = function (usuario) {
   // que sea el argumento de la funcion que despliega el modal
   miNodoBoton.setAttribute("data-bs-toggle", "modal");
   miNodoBoton.setAttribute("data-bs-target", "#exampleModal");
-
   miNodoBoton.setAttribute("onclick", `desplegarModal(${usuario.id})`);
   const miNodoBotonFav = document.createElement("button");
   miNodoBotonFav.classList.add("btn", "btn-primary", "col");
@@ -101,13 +98,15 @@ let crearTarjetas = function (usuario) {
   miNodoBody.appendChild(miNodoHeader);
   miNodoBody.appendChild(miNodoText);
   miNodoBody.appendChild(miNodoBotones);
+  //   miNodoBody.appendChild(miNodoBotonDos);
+  //   miNodoBody.appendChild(miNodoBotones);
+
   miNodoTarjeta.appendChild(miNodoBody);
   miNodoColumna.appendChild(miNodoTarjeta);
 
   tarjeta.appendChild(miNodoColumna);
-};
+});
 
-console.log(usuarios);
 // funcion para desplegar el modal dinamicamente
 function desplegarModal(x) {
   usuarios.forEach(function (usuario) {
