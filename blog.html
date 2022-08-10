@@ -18,16 +18,16 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
     />
   </head>
-  <body onload="tiempo()" style="margin:0;">
+  <body onload="tiempo()" style="margin: 0">
     <div id="loader"></div>
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page">Element 1</li>
+        <li class="breadcrumb-item active" aria-current="page">Elemento 1</li>
         <li class="breadcrumb-item active" aria-current="page">Elemento 2</li>
         <li class="breadcrumb-item active" aria-current="page">Elemento 3</li>
       </ol>
     </nav>
-    <div class="container" style="display:none;" id="myCards" class="animate-bottom">
+    <div class="container">
       <div class="row justify-content-center">
         <div class="col-6">
           <form class="d-flex m-4" role="search">
@@ -69,6 +69,34 @@
               Buscar por Favoritos
             </label>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row" id="tarjeta"></div>
+    </div>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body" id="modalBody">Esto es el body</div>
         </div>
       </div>
     </div>
