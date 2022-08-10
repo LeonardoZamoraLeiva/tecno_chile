@@ -1,28 +1,22 @@
 const url = "https://jsonplaceholder.typicode.com/posts";
+var datosFetched;
 
 const getDatos = () => {
   return new Promise((resolve, reject) => {
     resolve(fetch(url).then((response) => response.json()));
+    reject(new Error("No existen datos"));
   });
 };
 
-// console.log(usuarios);
 async function fectchinData() {
   try {
-    usuarios = [];
-    const datosFetched = await getDatos();
-    for (const dato of datosFetched) {
-      usuarios.push(dato);
-      if (dato === datosFetched[19]) {
-        break;
-      }
+    datosFetched = await getDatos();
+    for (i = 0; i < 20; i++) {
+      crearTarjetas(datosFetched[i]);
     }
   } catch (err) {
-    console.log(err);
+    console.log(err.message);
   }
-  usuarios.forEach((usuario) => {
-    crearTarjetas(usuario);
-  });
 }
 
 fectchinData();
@@ -51,15 +45,15 @@ function soloLetras(e) {
 }
 
 // crear tarjetas desde el array usuarios
-
-// console.log(usuarios);
 let tester = function () {
   for (let i = 0; i < 3; i++) {
     console.log(usuarios[i]);
   }
 };
 
-let crearTarjetas = function (usuario) {
+// console.log(data);
+let crearTarjetas = function (element) {
+  // console.log(element);
   const miNodoColumna = document.createElement("div");
   miNodoColumna.classList.add("col-4");
   const miNodoTarjeta = document.createElement("div");
@@ -69,10 +63,10 @@ let crearTarjetas = function (usuario) {
   miNodoBody.classList.add("card-body");
   const miNodoHeader = document.createElement("h5");
   miNodoHeader.classList.add("card-title");
-  miNodoHeader.textContent = usuario.title;
+  miNodoHeader.textContent = element.title;
   const miNodoText = document.createElement("p");
   miNodoText.classList.add("card-text");
-  miNodoText.textContent = usuario.title;
+  miNodoText.textContent = element.title;
   const miNodoBotones = document.createElement("div");
   miNodoBotones.classList.add("row", "justify-content-evenly");
   const miNodoBotonUno = document.createElement("div");
@@ -88,7 +82,7 @@ let crearTarjetas = function (usuario) {
   miNodoBoton.setAttribute("data-bs-toggle", "modal");
   miNodoBoton.setAttribute("data-bs-target", "#exampleModal");
 
-  miNodoBoton.setAttribute("onclick", `desplegarModal(${usuario.id})`);
+  miNodoBoton.setAttribute("onclick", `desplegarModal(${element.id})`);
   const miNodoBotonFav = document.createElement("button");
   miNodoBotonFav.classList.add("btn", "btn-primary", "col");
   miNodoBotonFav.textContent = "Favoritos";
@@ -107,10 +101,10 @@ let crearTarjetas = function (usuario) {
   tarjeta.appendChild(miNodoColumna);
 };
 
-console.log(usuarios);
 // funcion para desplegar el modal dinamicamente
 function desplegarModal(x) {
-  usuarios.forEach(function (usuario) {
+  console.log(datosFetched);
+  datosFetched.forEach(function (usuario) {
     if (x == usuario.id) {
       console.log(usuario.id);
       modalTile.textContent = usuario.title;
@@ -118,7 +112,6 @@ function desplegarModal(x) {
     }
   });
 }
-
 // Funcion para el loader
 var myVar;
 
