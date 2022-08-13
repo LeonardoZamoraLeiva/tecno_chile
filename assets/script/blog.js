@@ -31,7 +31,7 @@ async function fectchinData() {
       crearTarjetas(datosFetched[i]);
     }
   } catch (err) {
-    console.log(err.message);
+    console.log('No existen datos');
   }
 }
 
