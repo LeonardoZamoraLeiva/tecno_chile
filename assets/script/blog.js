@@ -1,6 +1,22 @@
 const url = "https://jsonplaceholder.typicode.com/posts";
 var datosFetched;
 
+const tresSegundos = new Promise((resolve, reject) => {
+  resolve(
+    setTimeout(function () {
+      console.log("Informacion enviada");
+    }, 3000)
+  );
+});
+
+async function recibirTresSegundos() {
+  try {
+    datosFetched = await tresSegundos();
+  } catch (err) {
+    console.log(err.message);
+  }
+}
+
 const getDatos = () => {
   return new Promise((resolve, reject) => {
     resolve(fetch(url).then((response) => response.json()));
