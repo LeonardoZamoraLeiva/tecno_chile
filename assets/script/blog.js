@@ -1,5 +1,7 @@
 const url = "https://jsonplaceholder.typicode.com/posts";
 var datosFetched;
+var listaFavoritos = [];
+// var firstLoad = false
 
 const getDatos = () => {
   return new Promise((resolve, reject) => {
@@ -12,7 +14,7 @@ async function fectchinData() {
   try {
     datosFetched = await getDatos();
     for (i = 0; i < 20; i++) {
-      crearTarjetas(datosFetched[i]);
+      crearTarjetas(datosFetched[i], "normal");
     }
   } catch (err) {
     console.log(err.message);
@@ -45,19 +47,24 @@ function soloLetras(e) {
 }
 
 // crear tarjetas desde el array usuarios
-let tester = function () {
+let tester = () => {
   for (let i = 0; i < 3; i++) {
     console.log(usuarios[i]);
   }
 };
 
 // console.log(data);
-let crearTarjetas = function (element) {
+let crearTarjetas = (element) => {
   // console.log(element);
   const miNodoColumna = document.createElement("div");
-  miNodoColumna.classList.add("col-4");
+  miNodoColumna.classList.add(
+    "col-lg-4",
+    "col-md-6",
+    "col-sm-12"
+    // "align-self-center"
+  );
   const miNodoTarjeta = document.createElement("div");
-  miNodoTarjeta.classList.add("card");
+  miNodoTarjeta.classList.add("card", "text-center", "w-100", "mb-3", "h-90");
   miNodoTarjeta.setAttribute("style", "width: 18rem");
   const miNodoBody = document.createElement("div");
   miNodoBody.classList.add("card-body");
@@ -81,13 +88,16 @@ let crearTarjetas = function (element) {
   // que sea el argumento de la funcion que despliega el modal
   miNodoBoton.setAttribute("data-bs-toggle", "modal");
   miNodoBoton.setAttribute("data-bs-target", "#exampleModal");
-
   miNodoBoton.setAttribute("onclick", `desplegarModal(${element.id})`);
-  const miNodoBotonFav = document.createElement("button");
-  miNodoBotonFav.classList.add("btn", "btn-primary", "col");
-  miNodoBotonFav.textContent = "Favoritos";
-  // asignamos cada chlild a su paren correspondiente
 
+  miNodoBotonFav.classList.add("btn", "text-bg-light", "col");
+
+  //   miNodoBotonFav.classList.add("btn", "text-bg-light", "col");
+  miNodoBotonFav.textContent = "Favoritos";
+  miNodoBotonFav.setAttribute("onclick", `addFavoritos(${element.id})`);
+  miNodoBotonFav.setAttribute("id", `favorito_${element.id}`);
+
+  // asignamos cada chlild a su paren correspondiente
   miNodoBotonUno.appendChild(miNodoBoton);
   miNodoBotonDos.appendChild(miNodoBotonFav);
   miNodoBotones.appendChild(miNodoBotonUno);
@@ -102,8 +112,7 @@ let crearTarjetas = function (element) {
 };
 
 // funcion para desplegar el modal dinamicamente
-function desplegarModal(x) {
-  console.log(datosFetched);
+let desplegarModal = (x) => {
   datosFetched.forEach(function (usuario) {
     if (x == usuario.id) {
       console.log(usuario.id);
@@ -111,15 +120,77 @@ function desplegarModal(x) {
       modalBody.textContent = usuario.body;
     }
   });
-}
+};
+
+let addFavoritos = (x) => {
+  let botonFavorito = document.getElementById(`favorito_${x}`);
+  console.log(botonFavorito);
+  if (listaFavoritos.length > 0) {
+    if (listaFavoritos.includes(x)) {
+      listaFavoritos = listaFavoritos.filter(function (item) {
+        return item !== x;
+      });
+      botonFavorito.classList.remove("text-bg-primary");
+      botonFavorito.classList.add("text-bg-light");
+    } else {
+      listaFavoritos.push(x);
+      botonFavorito.classList.remove("text-bg-light");
+      botonFavorito.classList.add("text-bg-primary");
+    }
+  } else {
+    listaFavoritos.push(x);
+    botonFavorito.classList.remove("text-bg-light");
+    botonFavorito.classList.add("text-bg-primary");
+  }
+  console.log(listaFavoritos);
+};
+
+let filtrarFavoritos = () => {
+  let textoBusqueda = document.getElementById("formaBusqueda").value;
+  let paraBuscar = document.getElementById("paraBuscar").value;
+  if (paraBuscar == "porFavorito") {
+    if (textoBusqueda.length == 0) {
+      tarjeta.textContent = "";
+      listaFavoritos.forEach((element) => {
+        crearTarjetas(datosFetched[element - 1]);
+      });
+    } else {
+      tarjeta.textContent = "";
+      listaFavoritos.forEach((element) => {
+        if (datosFetched[element - 1].title.includes(textoBusqueda))
+          crearTarjetas(datosFetched[element - 1]);
+      });
+    }
+  } else {
+    if (textoBusqueda.length == 0) {
+      tarjeta.textContent = "";
+      for (i = 0; i < 20; i++) {
+        crearTarjetas(datosFetched[i]);
+      }
+    } else {
+      tarjeta.textContent = "";
+      datosFetched.forEach((element) => {
+        if (element.title.includes(textoBusqueda)) {
+          crearTarjetas(element);
+        }
+      });
+    }
+  }
+  if (tarjeta.textContent == "") {
+    alert("No se encontraron coincidencias a tu busqueda");
+  }
+};
+// sacarlo de la lista y cambiar el color del padre a no favorito
+// continue
+
 // Funcion para el loader
 var myVar;
 
-function tiempo() {
+let tiempo = () => {
   myVar = setTimeout(showPage, 3000);
-}
+};
 
-function showPage() {
+let showPage = () => {
   document.getElementById("loader").style.display = "none";
   document.getElementById("myCards").style.display = "block";
-}
+};

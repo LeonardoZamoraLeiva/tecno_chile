@@ -30,50 +30,32 @@
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-6">
-          <form class="d-flex m-4" role="search">
+
             <input
               class="form-control me-2"
               type="search"
               placeholder="Search"
               aria-label="Search"
+              id="formaBusqueda"
               onkeypress="return /[a-z-ñ]/i.test(event.key)"
             />
-            <button class="btn btn-success" type="submit">Search</button>
-          </form>
+
+          <!-- </form> -->
+        </div>
+        <div class="col-3">            
+          <button class="btn btn-success" type="submit" onclick=(filtrarFavoritos())>Search</button>
+        </div>
+        <div class="col-3">
+          <!-- <label for="paraBuscar">Elige tu busqueda:</label> -->
+          <select name="paraBuscar" id="paraBuscar">
+            <option value="porNombre">Por Nombre</option>
+            <option value="porFavorito">Por Favoritos</option>
+          </select>
         </div>
       </div>
       <div
-        class="row justify-content-center"
-        onload="setTimeout(crearTarjeta(),3000)"
-      >
-        <div class="col-3">
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="flexRadioDefault"
-              id="flexRadioDefault1"
-            />
-            <label class="form-check-label" for="flexRadioDefault1">
-              Buscar por Nombre
-            </label>
-          </div>
-        </div>
-        <div class="col-3">
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="flexRadioDefault"
-              id="flexRadioDefault2"
-              checked
-            />
-            <label class="form-check-label" for="flexRadioDefault2">
-              Buscar por Favoritos
-            </label>
-          </div>
-        </div>
-      </div>
+        class="row justify-content-center mt-5"
+        onload="setTimeout(crearTarjeta(),3000)">
     </div>
 
     <div class="container">
