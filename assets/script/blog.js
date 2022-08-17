@@ -1,6 +1,6 @@
 const url = "https://jsonplaceholder.typicode.com/posts";
 var datosFetched;
-var listaFavoritos = [];
+var listaFavoritos = [10, 5, 15, 3];
 // var firstLoad = false
 
 const getDatos = () => {
@@ -14,7 +14,7 @@ async function fectchinData() {
   try {
     datosFetched = await getDatos();
     for (i = 0; i < 20; i++) {
-      crearTarjetas(datosFetched[i], "normal");
+      crearTarjetas(datosFetched[i]);
     }
   } catch (err) {
     console.log(err.message);
@@ -90,8 +90,12 @@ let crearTarjetas = (element) => {
   miNodoBoton.setAttribute("data-bs-target", "#exampleModal");
   miNodoBoton.setAttribute("onclick", `desplegarModal(${element.id})`);
 
-  miNodoBotonFav.classList.add("btn", "text-bg-light", "col");
-
+  const miNodoBotonFav = document.createElement("button");
+  if (listaFavoritos.includes(element.id)) {
+    miNodoBotonFav.classList.add("btn", "text-bg-primary", "col");
+  } else {
+    miNodoBotonFav.classList.add("btn", "text-bg-light", "col");
+  }
   //   miNodoBotonFav.classList.add("btn", "text-bg-light", "col");
   miNodoBotonFav.textContent = "Favoritos";
   miNodoBotonFav.setAttribute("onclick", `addFavoritos(${element.id})`);
