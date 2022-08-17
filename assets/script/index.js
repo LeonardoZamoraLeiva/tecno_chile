@@ -15,7 +15,7 @@ function preguntarNombre() {
     if (name == null || name == "") {
       txt = "No Name provided";
     } else {
-      txt = `Bienvenido ${name}!`;
+      txt = `¡Hola ${name}!`;
       localStorage.setItem("usuario", name);
       var miStorage = localStorage.getItem("usuario");
       // console.log(miStorage);

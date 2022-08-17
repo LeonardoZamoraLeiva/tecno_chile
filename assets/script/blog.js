@@ -3,6 +3,22 @@ var datosFetched;
 var listaFavoritos = [10, 5, 15, 3];
 // var firstLoad = false
 
+const tresSegundos = new Promise((resolve, reject) => {
+  resolve(
+    setTimeout(function () {
+      console.log("Informacion enviada");
+    }, 3000)
+  );
+});
+
+async function recibirTresSegundos() {
+  try {
+    datosFetched = await tresSegundos();
+  } catch (err) {
+    console.log(err.message);
+  }
+}
+
 const getDatos = () => {
   return new Promise((resolve, reject) => {
     resolve(fetch(url).then((response) => response.json()));
@@ -17,7 +33,7 @@ async function fectchinData() {
       crearTarjetas(datosFetched[i]);
     }
   } catch (err) {
-    console.log(err.message);
+    console.log('No existen datos');
   }
 }
 
