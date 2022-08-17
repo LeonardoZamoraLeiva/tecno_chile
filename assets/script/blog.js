@@ -1,6 +1,6 @@
 const url = "https://jsonplaceholder.typicode.com/posts";
 var datosFetched;
-var listaFavoritos = [10, 5, 15, 3];
+var listaFavoritos = [];
 // var firstLoad = false
 
 const tresSegundos = new Promise((resolve, reject) => {
@@ -33,7 +33,7 @@ async function fectchinData() {
       crearTarjetas(datosFetched[i]);
     }
   } catch (err) {
-    console.log('No existen datos');
+    console.log("No existen datos");
   }
 }
 
